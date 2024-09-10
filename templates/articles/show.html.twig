@@ -1,0 +1,76 @@
+{% extends 'base_content.html.twig' %}
+
+{% block title %}Статья: {{ article.title }}{% endblock %}
+
+{% block content_row_class %}{{ parent() }} no-gutters featured-border{% endblock %}
+{% block content_col_class %}{{ parent() }}article-detail{% endblock %}
+
+{% block content %}
+
+<div class="col-sm-12 p-2">
+    <div class="media d-flex align-content-center">
+        <img class="article-detail-image align-self-start mr-3 rounded" src="{{ upload_asset('article_uploads', article.imageFilename ) }}" alt="">
+        <div class="media-body d-inline-block align-self-center">
+            <h1 class="mb-2">{{ article.title }}</h1>
+            {% include 'partial/article_tags.html.twig' with { tags: article.tags } %}
+            <div class="d-flex">
+                <div class="text-muted align-self-center">
+                    <img
+                            class="article-author-img rounded-circle mr-2"
+                            src="{{ article.author.avatarUrl }}" alt="">
+                    {{ article.author.firstName }}
+                </div>
+                <div class="text-muted align-self-center ml-4">{{ article.publishedAt ? article.publishedAt|ago : 'Неопубликована'}}</div>
+                <div
+                        class="text-muted align-self-center ml-4 article-detail-hearts"
+                        data-item="likes"
+                        data-type="like"
+                        data-like-href="{{ path('app_article_like',  {slug: article.slug, type: 'like'}) }}"
+                        data-dislike-href="{{ path('app_article_like',  {slug: article.slug, type: 'dislike'}) }}"
+                ><span data-item="likesCount">{{ article.likeCount }}</span> <i class="far fa-heart text-danger"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="col-12 mt-2 mb-4">
+        {{ article.body|raw }}
+    </div>
+
+
+    <div class="col-sm-12 mb-4">
+        <h3><i class="pr-3 far fa-comment text-secondary"></i>{{ article.nonDeletedComments|length }} Комментария</h3>
+        <hr>
+
+        <div class="row mb-4">
+            <div class="col-sm-12">
+                <div class="comment-container align-self-start col-sm-6">
+                    <div class="form-group">
+                        <label>
+                            <textarea class="form-control" rows="2"></textarea>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-info">Комментировать</button>
+                </div>
+            </div>
+        </div>
+
+        {% for comment in article.nonDeletedComments %}
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <div class="media">
+                        <img class="align-self-start comment-img rounded-circle" src="{{ asset('images/cat-profile.png') }}" alt="">
+                        <div class="media-body align-self-start col-sm-6">
+                            <b>{{ comment.authorName }}</b>
+                            <small>{{ comment.createdAt|ago }} {% if comment.deletedAt %} DELETED {% endif %}</small>
+                            <br>
+                            <span class="comment">{{ comment.content }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

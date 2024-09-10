@@ -1,0 +1,3 @@
+GET http://localhost:8000/api/user
+Accept: application/json
+Authorization: Bearer 40ba1d6ec7aa958ab7b47bbe2847ec52e67cc1fa

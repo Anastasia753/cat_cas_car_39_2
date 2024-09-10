@@ -1,0 +1,48 @@
+{% extends 'base_content.html.twig' %}
+
+{% block title %}Генерация контента статьи{% endblock %}
+
+{% block content_row_class %}{{ parent() }} p-4{% endblock %}
+{% block content_col_class %}p-0{% endblock %}
+
+{% block content %}
+<h1>Генерация контента статьи</h1>
+
+<form>
+    <div class="form-group">
+        <label>Количество параграфов</label>
+        <input
+            type="text"
+            class="form-control"
+            name="paragraphs"
+            value="{{ app.request.query.get('paragraphs') }}"
+        >
+    </div>
+   
+    <div class="form-group">
+        <label>Вставляемое слово</label>
+        <input
+            type="text"
+            class="form-control"
+            name="word"
+            value="{{ app.request.query.get('word') }}"
+        >
+    </div>
+    <div class="form-group">
+        <label>Количество повторений вставляемого слова</label>
+        <input
+            type="text"
+            class="form-control"
+            name="wordsCount"
+            value="{{ app.request.query.get('wordsCount') }}"
+        >
+    </div>
+    <button type="submit" class="btn btn-primary">Сгенерировать</button>
+</form>
+
+{% if (articleContent) %}
+<hr>
+<div>{{ articleContent|raw }}</div>
+{% endif %}
+
+{% endblock %}

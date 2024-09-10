@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                {{ form_start(registrationForm, {
+                    attr: {class: 'form-signin'}
+                }) }}
+
+                    {{ form_row(registrationForm.email, {
+                        attr: {placeholder: 'Ваш Email...'},
+                        label_attr: { class: '' }
+                    }) }}
+                    {{ form_row(registrationForm.firstName, {
+                        attr: {placeholder: 'Ваше Имя...'},
+                        label_attr: { class: '' }
+                    }) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        attr: {placeholder: 'Ваш Пароль...'},
+                        label_attr: { class: '' }
+                    }) }}
+                    {{ form_row(registrationForm.agreeTerms, {
+                        label: 'Согласен с условиями',
+                    }) }}
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+                {{ form_end(registrationForm) }}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

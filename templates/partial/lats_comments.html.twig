@@ -1,0 +1,7 @@
+<div class="quotes-container bg-white shadow-sm border rounded-lg pb-2 pt-2 px-5 featured-border">
+    <h3 class="text-center pb-3">Коты в теме</h3>
+    {% for comment in comments %}
+    <p><i class="far fa-comment text-secondary"></i> "{{ comment.comment|raw }}"
+        <br> — <a href="#">{{ comment.author }}</a></p>
+    {% endfor %}
+</div>

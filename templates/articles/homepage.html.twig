@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+
+                        {{ render(controller('App\\Controller\\PartialController::mainBanner', { banner: banner })) }}
+
+                        {% for article in articles %}
+                        <div class="article-container mb-2">
+                            <div class="row no-gutters border rounded-lg overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+                                <div class="col-auto d-none d-lg-block">
+                                    <img class="article-img" src="{{ upload_asset('article_uploads', article.imageFilename ) }}" alt="">
+                                </div>
+                                <a class="col p-2 px-4 d-flex flex-column article-item" href="{{ path('app_article_show', { slug: article.slug }) }}">
+                                    <h5 class="mb-2">{{ article.title }}<span class="badge badge-info article-comments">{{ article.nonDeletedComments|length }} комментов</span></h5>
+                                    {% include 'partial/article_tags.html.twig' with { tags: article.tags } %}
+                                    <div class="d-flex justify-content-between">
+                                        <div class="text-muted align-self-center">
+                                            <img
+                                                    class="article-author-img rounded-circle"
+                                                    src="{{ article.author.avatarUrl }}" alt="">
+                                            {{ article.author.firstName }}
+                                        </div>
+                                        <div class="text-muted align-self-center">{{ article.publishedAt ? article.publishedAt|ago }}</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 text-center">
+                        <div class="bg-white shadow-sm border rounded-lg pb-2 pt-2 px-5 mb-4 featured-border">
+                            <div class="ad-space mx-auto mt-1 pb-2 pt-2">
+                                <img class="advertisement-img mb-2" src="{{ asset('images/cat-food.jpg') }}" alt="">
+                                <p><b>Новинка:</b> Лакомные <i class="fas fa-heart text-warning"></i> <i class="fas fa-heart text-info"></i> <i class="fas fa-heart text-danger"></i></p>
+                                <button class="btn btn-info">Купить сейчас</button>
+                            </div>
+                        </div>
+
+                        {{ render(controller('App\\Controller\\PartialController::catsKnowThis')) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

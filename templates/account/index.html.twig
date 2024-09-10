@@ -1,0 +1,40 @@
+{% extends 'base_content.html.twig' %}
+
+{% block title %}Личный кабинет{% endblock %}
+{% block content_row_class %}{% endblock %}
+
+{% block content %}
+<div class="card border rounded-lg mb-4 shadow-sm bg-white">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="{{ app.user.avatarUrl }}" style="width: 100%">
+            </div>
+            <div class="col-sm-10">
+                <div class="d-flex justify-content-between" style="height: 100%;">
+                    <h3 class="align-self-center mb-0">Привет, {{ app.user.firstName }}</h3>
+                    <a class="btn btn-labeled btn-info align-self-center" href="#">
+                        <span class="btn-label"><i class="fas fa-edit"></i></span> Профиль
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row overview">
+            <div class="col-md-4 user-pad text-center">
+                <h3>Котов поглажено</h3>
+                <h4 class="text-muted">3,892</h4>
+            </div>
+            <div class="col-md-4 user-pad text-center">
+                <h3>Комментариев</h3>
+                <h4 class="text-muted">184</h4>
+            </div>
+            <div class="col-md-4 user-pad text-center">
+                <h3>Консерв съедено</h3>
+                <h4 class="text-muted">1,910</h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
